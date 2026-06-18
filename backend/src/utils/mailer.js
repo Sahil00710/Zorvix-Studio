@@ -17,14 +17,17 @@ function createTransporter() {
   }
 
   return nodemailer.createTransport({
-    host: env.SMTP_HOST,
-    port: env.SMTP_PORT,
-    secure: env.SMTP_SECURE ?? false,
-    auth: {
-      user: env.SMTP_USER,
-      pass: env.SMTP_PASS,
-    },
-  });
+  host: env.SMTP_HOST,
+  port: Number(env.SMTP_PORT),
+  secure: String(env.SMTP_SECURE) === "true",
+  auth: {
+    user: env.SMTP_USER,
+    pass: env.SMTP_PASS,
+  },
+  connectionTimeout: 30000,
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
+});
 }
 
 export async function sendContactNotification(inquiry) {
