@@ -19,6 +19,7 @@ import { ScrollToTopButton } from "@/components/ui/ScrollToTopButton";
 import { SITE } from "@/lib/constants";
 import { organizationSchema, websiteSchema } from "@/lib/seo";
 import { Toaster } from "sonner";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function NotFoundComponent() {
   return (
@@ -131,6 +132,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <SpeedInsights />
         <Scripts />
       </body>
     </html>

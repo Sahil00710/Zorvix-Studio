@@ -51,13 +51,13 @@ npm run backend:dev
 The frontend expects the API at:
 
 ```txt
-http://localhost:5000
+https://zorvix-studio.onrender.com
 ```
 
 You can override that with:
 
 ```env
-VITE_API_BASE_URL=http://localhost:5000
+VITE_API_BASE_URL=https://zorvix-studio.onrender.com
 ```
 
 ## Security notes

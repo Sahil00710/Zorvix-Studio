@@ -10,29 +10,7 @@ const configuredOrigins = [
     : []),
 ];
 
-const devOrigins = env.NODE_ENV === "development"
-  ? [
-      "http://localhost:3000",
-      "http://127.0.0.1:3000",
-      "http://localhost:4173",
-      "http://127.0.0.1:4173",
-      "http://localhost:5173",
-      "http://127.0.0.1:5173",
-    ]
-  : [];
-
-export const ALLOWED_ORIGINS = Array.from(new Set([...configuredOrigins, ...devOrigins]));
-
-function isLocalDevHostname(hostname) {
-  return (
-    hostname === "localhost" ||
-    hostname === "127.0.0.1" ||
-    hostname === "::1" ||
-    /^192\.168\.\d{1,3}\.\d{1,3}$/.test(hostname) ||
-    /^10\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(hostname) ||
-    /^172\.(1[6-9]|2\d|3[0-1])\.\d{1,3}\.\d{1,3}$/.test(hostname)
-  );
-}
+export const ALLOWED_ORIGINS = Array.from(new Set(configuredOrigins));
 
 export function isAllowedOrigin(origin) {
   if (!origin) {
@@ -42,17 +20,7 @@ export function isAllowedOrigin(origin) {
   if (ALLOWED_ORIGINS.includes(origin)) {
     return true;
   }
-
-  if (env.NODE_ENV !== "development") {
-    return false;
-  }
-
-  try {
-    const parsedOrigin = new URL(origin);
-    return parsedOrigin.protocol === "http:" && isLocalDevHostname(parsedOrigin.hostname);
-  } catch {
-    return false;
-  }
+  return false;
 }
 
 export function getSessionCookieOptions() {
