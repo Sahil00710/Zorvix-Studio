@@ -30,6 +30,17 @@ export function createApp() {
     next();
   });
 
+  app.get("/", (_req, res) => {
+    res.json({
+      success: true,
+      message: "Zorvix backend is running",
+      routes: {
+        health: "/health",
+        api: "/api",
+      },
+    });
+  });
+
   app.get("/health", (_req, res) => {
     res.json({ success: true, message: "Backend healthy" });
   });
