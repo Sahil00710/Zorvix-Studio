@@ -164,3 +164,171 @@ npm run db:seed-admin
 ## License
 
 This project is currently maintained by **Sahil** for Zorvix Studio.
+
+```
+Zorvix Web-Frontend
+├─ .prettierignore
+├─ .prettierrc
+├─ backend
+│  ├─ nodemon.json
+│  ├─ package-lock.json
+│  ├─ package.json
+│  ├─ README.md
+│  └─ src
+│     ├─ app.js
+│     ├─ config
+│     │  ├─ cookie.js
+│     │  ├─ cors.js
+│     │  ├─ env.js
+│     │  └─ security.js
+│     ├─ db
+│     │  ├─ connection.js
+│     │  ├─ migrate.js
+│     │  ├─ migrations
+│     │  │  └─ 001_init.sql
+│     │  └─ seed-admin.js
+│     ├─ middleware
+│     │  ├─ auth.middleware.js
+│     │  ├─ error.middleware.js
+│     │  ├─ notFound.middleware.js
+│     │  ├─ origin.middleware.js
+│     │  ├─ rateLimit.middleware.js
+│     │  └─ validate.middleware.js
+│     ├─ modules
+│     │  ├─ auth
+│     │  │  ├─ auth.controller.js
+│     │  │  ├─ auth.routes.js
+│     │  │  ├─ auth.service.js
+│     │  │  └─ auth.validation.js
+│     │  ├─ contact
+│     │  │  ├─ contact.controller.js
+│     │  │  ├─ contact.routes.js
+│     │  │  ├─ contact.service.js
+│     │  │  └─ contact.validation.js
+│     │  └─ inquiries
+│     │     ├─ inquiry.controller.js
+│     │     ├─ inquiry.routes.js
+│     │     ├─ inquiry.service.js
+│     │     └─ inquiry.validation.js
+│     ├─ server.js
+│     └─ utils
+│        ├─ AppError.js
+│        ├─ asyncHandler.js
+│        ├─ auditLog.js
+│        ├─ hash.js
+│        ├─ mailer.js
+│        ├─ response.js
+│        └─ session.js
+├─ docs
+│  ├─ api-routes.md
+│  ├─ backend-setup.md
+│  └─ deployment.md
+├─ frontend
+│  ├─ components.json
+│  ├─ eslint.config.js
+│  ├─ package-lock.json
+│  ├─ package.json
+│  ├─ public
+│  │  ├─ favicon.ico
+│  │  ├─ og-image.webp
+│  │  ├─ robots.txt
+│  │  └─ sitemap.xml
+│  ├─ README.md
+│  ├─ src
+│  │  ├─ assets
+│  │  │  └─ projects
+│  │  │     ├─ ai-chatbot.webp
+│  │  │     ├─ bar.webp
+│  │  │     ├─ Blog.png
+│  │  │     ├─ creative-agency-view.webp
+│  │  │     ├─ game.webp
+│  │  │     ├─ icon-logo.webp
+│  │  │     ├─ keyboard.webp
+│  │  │     ├─ lunara-clothes.webp
+│  │  │     ├─ view-2.webp
+│  │  │     └─ zorvix-marketing.webp
+│  │  ├─ components
+│  │  │  ├─ animations
+│  │  │  │  ├─ AnimatedCounter.tsx
+│  │  │  │  ├─ FadeIn.tsx
+│  │  │  │  ├─ ParallaxSection.tsx
+│  │  │  │  ├─ SplitText.tsx
+│  │  │  │  └─ StaggerChildren.tsx
+│  │  │  ├─ layout
+│  │  │  │  ├─ Footer.tsx
+│  │  │  │  └─ Navbar.tsx
+│  │  │  ├─ sections
+│  │  │  │  ├─ about
+│  │  │  │  ├─ admin
+│  │  │  │  ├─ blog
+│  │  │  │  ├─ contact
+│  │  │  │  ├─ home
+│  │  │  │  │  ├─ CTASection.tsx
+│  │  │  │  │  ├─ FeaturedProjects.tsx
+│  │  │  │  │  ├─ HeroSection.tsx
+│  │  │  │  │  ├─ IntroSection.tsx
+│  │  │  │  │  ├─ ProcessSection.tsx
+│  │  │  │  │  ├─ ServicesPreview.tsx
+│  │  │  │  │  ├─ StatsSection.tsx
+│  │  │  │  │  ├─ TechStackSection.tsx
+│  │  │  │  │  └─ TestimonialsSection.tsx
+│  │  │  │  ├─ projects
+│  │  │  │  └─ services
+│  │  │  ├─ special
+│  │  │  │  ├─ CursorGlow.tsx
+│  │  │  │  ├─ LoadingScreen.tsx
+│  │  │  │  ├─ NoiseTexture.tsx
+│  │  │  │  └─ ParticleField.tsx
+│  │  │  └─ ui
+│  │  │     ├─ button.tsx
+│  │  │     ├─ GlowButton.tsx
+│  │  │     ├─ Logo.tsx
+│  │  │     ├─ MagneticButton.tsx
+│  │  │     ├─ ScrollIndicator.tsx
+│  │  │     ├─ ScrollToTopButton.tsx
+│  │  │     └─ SectionLabel.tsx
+│  │  ├─ data
+│  │  │  ├─ blog-posts.ts
+│  │  │  ├─ project-images.ts
+│  │  │  ├─ projects.ts
+│  │  │  ├─ services.ts
+│  │  │  ├─ team.ts
+│  │  │  └─ testimonials.ts
+│  │  ├─ hooks
+│  │  │  └─ useContactForm.ts
+│  │  ├─ lib
+│  │  │  ├─ api.ts
+│  │  │  ├─ constants.ts
+│  │  │  ├─ error-capture.ts
+│  │  │  ├─ error-page.ts
+│  │  │  ├─ gsap.ts
+│  │  │  ├─ lenis-provider.tsx
+│  │  │  ├─ seo.ts
+│  │  │  └─ utils.ts
+│  │  ├─ router.tsx
+│  │  ├─ routes
+│  │  │  ├─ about.tsx
+│  │  │  ├─ admin.inquiries.tsx
+│  │  │  ├─ blog.$slug.tsx
+│  │  │  ├─ blog.tsx
+│  │  │  ├─ contact.tsx
+│  │  │  ├─ index.tsx
+│  │  │  ├─ projects.$slug.tsx
+│  │  │  ├─ projects.tsx
+│  │  │  ├─ services.tsx
+│  │  │  └─ __root.tsx
+│  │  ├─ routeTree.gen.ts
+│  │  ├─ server.ts
+│  │  ├─ start.ts
+│  │  ├─ store
+│  │  │  └─ useAppStore.ts
+│  │  ├─ styles.css
+│  │  └─ vite-env.d.ts
+│  ├─ tsconfig.json
+│  ├─ vercel.json
+│  ├─ vite.config.ts
+│  └─ wrangler.jsonc
+├─ README.md
+└─ vercel.json
+
+```

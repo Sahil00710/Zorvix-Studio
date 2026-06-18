@@ -7,6 +7,7 @@
     "dev": "vite dev",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "deploy": "npm run build && wrangler deploy --config dist/server/wrangler.json",
     "preview": "wrangler dev --config dist/server/wrangler.json --port 4173 --persist-to .wrangler/preview-state",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
