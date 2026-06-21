@@ -27,15 +27,6 @@ const envSchema = z.object({
   RESEND_API_KEY: z.string().optional(),
   EMAIL_FROM: z.string().email().optional(),
   EMAIL_FROM_NAME: z.string().optional(),
-  SMTP_HOST: z.string().optional(),
-  SMTP_PORT: z.coerce.number().int().min(1).max(65535).optional(),
-  SMTP_SECURE: z
-    .union([z.literal("true"), z.literal("false")])
-    .optional()
-    .transform((value) => value === "true"),
-  SMTP_USER: z.string().optional(),
-  SMTP_PASS: z.string().optional(),
-  SMTP_FROM_EMAIL: z.string().email().optional(),
   CONTACT_NOTIFY_EMAIL: z.string().email().optional(),
   ADMIN_SEED_NAME: z.string().min(1).default("Zorvix Admin"),
   ADMIN_SEED_EMAIL: z.string().email(),

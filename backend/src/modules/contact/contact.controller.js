@@ -16,11 +16,9 @@ export async function submitContactInquiry(req, res) {
     userAgent: req.get("user-agent") || null,
   });
 
-  try {
-    await sendContactNotification(data);
-  } catch (error) {
+  sendContactNotification(data).catch((error) => {
     console.error("Failed to send contact inquiry notification email.", error);
-  }
+  });
 
   return sendSuccess(res, "Your inquiry has been submitted successfully.");
 }
