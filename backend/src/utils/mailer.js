@@ -20,6 +20,14 @@ function getEmailFrom() {
   return `${fromName} <${fromEmail}>`;
 }
 
+function isResendTestingRecipientError(error) {
+  return (
+    error?.statusCode === 403 &&
+    error?.name === "validation_error" &&
+    String(error?.message || "").includes("You can only send testing emails")
+  );
+}
+
 function buildMessageText(inquiry) {
   return [
     `Name: ${inquiry.name || "Unknown"}`,
@@ -70,7 +78,16 @@ export async function sendContactNotification(inquiry) {
   });
 
   if (error) {
-    console.error("Failed to send contact inquiry notification email.", error);
+    if (isResendTestingRecipientError(error)) {
+      console.warn(
+        [
+          "Contact email skipped: Resend testing sender can only email the Resend account owner.",
+          "Fix Render CONTACT_NOTIFY_EMAIL to match the Resend account email, or verify a domain in Resend and set EMAIL_FROM to that domain email.",
+        ].join(" "),
+      );
+      return;
+    }
+
     throw error;
   }
 
