@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -20,6 +22,15 @@ import { SITE } from "@/lib/constants";
 import { organizationSchema, websiteSchema } from "@/lib/seo";
 import { Toaster } from "sonner";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+
+const GA_MEASUREMENT_ID = "G-BJRCF8XTKB";
+
+declare global {
+  interface Window {
+    dataLayer: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 
 function NotFoundComponent() {
   return (
@@ -109,6 +120,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     scripts: [
       {
+        src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
+        async: true,
+      },
+      {
+        children: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} window.gtag = gtag; gtag('js', new Date()); gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });`,
+      },
+      {
         type: "application/ld+json",
         children: JSON.stringify(organizationSchema()),
       },
@@ -145,6 +163,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <LenisProvider>
+        <GoogleAnalyticsPageTracker />
         <LoadingScreen />
         <ScrollIndicator />
         <ScrollToTopButton />
@@ -167,4 +186,22 @@ function RootComponent() {
       </LenisProvider>
     </QueryClientProvider>
   );
+}
+
+function GoogleAnalyticsPageTracker() {
+  const location = useRouterState({ select: (state) => state.location });
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.gtag !== "function") {
+      return;
+    }
+
+    window.gtag("config", GA_MEASUREMENT_ID, {
+      page_path: `${location.pathname}${location.searchStr}`,
+      page_title: document.title,
+      page_location: window.location.href,
+    });
+  }, [location.pathname, location.searchStr]);
+
+  return null;
 }
